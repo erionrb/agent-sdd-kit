@@ -1,0 +1,2 @@
+- [User Profile](user_profile.md) — senior dev at Protofire, uses Cursor + Claude Code, building SDD workflow
+- [Project: ia repo](project_ia_repo.md) — learning path and SDD framework setup for AI-driven development
