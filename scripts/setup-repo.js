@@ -287,6 +287,45 @@ Or reference it directly in a conversation by pasting the content of \`${phasePa
 }
 
 // ---------------------------------------------------------------------------
+// .cursor/commands (mirrors .claude/commands with Cursor frontmatter)
+// ---------------------------------------------------------------------------
+
+console.log('\n--- .cursor/commands ---');
+for (const cmd of COMMANDS) {
+  const id = cmd.file.replace('.md', '');
+  const content = `---
+name: /${id}
+id: ${id}
+category: Workflow
+description: ${cmd.description.split('\n')[0]}
+---
+
+# ${cmd.title}
+
+${cmd.description}
+${refNote()}
+## Phase prompt
+
+- ${phasePath(cmd.phase)}
+
+## Policies
+
+${policyList()}
+
+## Usage
+
+Invoke this command in Cursor:
+
+\`\`\`
+/${id}
+\`\`\`
+
+Or reference it directly in a conversation by pasting the content of \`${phasePath(cmd.phase)}\`.
+`;
+  writeFile(path.join(targetAbs, '.cursor', 'commands', cmd.file), content);
+}
+
+// ---------------------------------------------------------------------------
 // docs/context stubs
 // ---------------------------------------------------------------------------
 
@@ -512,6 +551,91 @@ Update this file at the start of each session with current project state.
 > **TODO:** List any active constraints — frozen files, WIP migrations, blocked PRs, etc.
 `
 );
+
+// ---------------------------------------------------------------------------
+// .cursor/rules/project.mdc (Cursor equivalent of CLAUDE.md)
+// ---------------------------------------------------------------------------
+
+console.log('\n--- .cursor/rules ---');
+
+writeFile(
+  path.join(targetAbs, '.cursor', 'rules', 'project.mdc'),
+  `---
+description: Project instructions — SDD workflow, commands, and structure
+alwaysApply: true
+---
+
+# Project overview
+
+> **TODO:** One paragraph describing what this project does and who uses it.
+
+## Tech stack
+
+> **TODO:** List language, framework, database, infrastructure, and key libraries.
+
+## Key commands
+
+\`\`\`bash
+# TODO: Add the commands needed to build, test, lint, and run the project.
+\`\`\`
+
+## SDD Workflow
+
+All feature work follows the Spec Driven Development cycle:
+
+\`\`\`
+/discovery → /local-documentation
+  (pre-OpenSpec: gather requirements and context, no artifacts, no implementation)
+
+→ /opsx-explore        if requirements are still unclear
+→ /opsx-propose        generates proposal.md + design.md + tasks.md
+→ /opsx-apply          implements the next incomplete task (one per session)
+→ /review-task → /qa → (debug if needed)
+→ /summary-before-clear → clear context
+→ /opsx-archive        (only after review + QA + summary are complete)
+\`\`\`
+
+**OpenSpec commands are the preferred way to propose, apply, and archive changes.**
+The \`.cursor/commands/\` SDD shortcuts are guardrails and policy wrappers — use them for
+phases that don't have a dedicated OpenSpec command (discovery, local docs, review, QA, debug, summary).
+
+| Phase | Preferred |
+|-------|-----------|
+| Discovery | \`/discovery\` |
+| Local docs | \`/local-documentation\` |
+| Explore requirements | \`/opsx-explore\` |
+| OpenSpec planning | \`/opsx-propose\` |
+| Implement task | \`/opsx-apply\` |
+| Review task | \`/review-task\` |
+| QA | \`/qa\` |
+| Debug | \`/debug-compressed\` |
+| Summary | \`/summary-before-clear\` |
+| Archive change | \`/opsx-archive\` |
+
+## Constraints
+
+- Do not scan the entire repository. Use the file allowlist in \`prompts/policies/file-allowlist-policy.md\`.
+- Keep output concise. Follow \`prompts/policies/output-policy.md\`.
+- Select models per task size. Follow \`prompts/policies/model-policy.md\`.
+- Respect token budgets. Follow \`prompts/policies/budget-policy.md\`.
+`
+);
+
+// ---------------------------------------------------------------------------
+// docs/workflow/agent-sdd-process.md
+// Always copied (both modes) — developers need local instructions regardless.
+// ---------------------------------------------------------------------------
+
+console.log('\n--- Workflow guide ---');
+
+const workflowSrc = path.join(SOURCE_ROOT, 'docs', 'workflow', 'agent-sdd-process.md');
+const workflowDest = path.join(targetAbs, 'docs', 'workflow', 'agent-sdd-process.md');
+
+if (fs.existsSync(workflowSrc)) {
+  copyFile(workflowSrc, workflowDest);
+} else {
+  console.log('  WARN     docs/workflow/agent-sdd-process.md not found in source — skipping');
+}
 
 // ---------------------------------------------------------------------------
 // Summary

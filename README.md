@@ -13,7 +13,8 @@ This is **not** an application runtime. It is the **tooling, training, prompt, a
 | Learn SDD end-to-end | [docs/training/path/README.md](./docs/training/path/README.md) |
 | Use the prompt skeletons in your own work | [prompts/README.md](./prompts/README.md) |
 | Bootstrap a target repo with this workflow | [Quick start below](#quick-start-bootstrap-another-project) |
-| Understand the Claude / OpenSpec command flow | [CLAUDE.md](./CLAUDE.md) |
+| Operate the workflow after bootstrapping | [docs/workflow/agent-sdd-process.md](./docs/workflow/agent-sdd-process.md) |
+| Understand the Claude / OpenSpec command flow | [CLAUDE.md](./CLAUDE.md) / [.cursor/rules/project.mdc](./.cursor/rules/project.mdc) |
 | Know what to build next in this repo | [docs/training/path/08-whats-next.md](./docs/training/path/08-whats-next.md) |
 
 Familiar with LLMs already? Jump to **step 04** in the learning path, then **07** and **08**.
@@ -29,7 +30,10 @@ Familiar with LLMs already? Jump to **step 04** in the learning path, then **07*
 | **Policies** | `prompts/policies/` — standing rules injected into agent sessions |
 | **Phase prompts** | `prompts/phases/` — one prompt per SDD phase, ready to copy or reference |
 | **`setup:repo` command** | Bootstraps any target repository with the full SSD/SDD folder structure |
+| **Operational workflow guide** | `docs/workflow/agent-sdd-process.md` — phase-by-phase instructions copied into every target repo |
 | **Claude Code commands** | `/openspec-explore`, `/openspec-propose`, `/openspec-apply-change`, `/openspec-archive-change` |
+| **Cursor commands** | `/opsx-explore`, `/opsx-propose`, `/opsx-apply`, `/opsx-archive` — mirrored in `.cursor/commands/` |
+| **Cursor Rules** | `.cursor/rules/project.mdc` — auto-loaded project context for Cursor (equivalent of `CLAUDE.md`) |
 | **OpenSpec root** | `openspec/config.yaml` and `openspec/changes/` scaffold |
 | **Session memory** | `memory/` — persistent agent context across sessions |
 | **Context docs** | `AI_CONTEXT.md`, `CLAUDE.md` — agent onboarding and operating instructions |
@@ -40,7 +44,9 @@ Familiar with LLMs already? Jump to **step 04** in the learning path, then **07*
 
 ```text
 .claude/                  Claude Code commands and skills (opsx: propose, apply, explore, archive)
-.cursor/                  Same skills mirrored for Cursor
+.cursor/rules/            Cursor Rules — project context auto-loaded by Cursor (equivalent of CLAUDE.md)
+.cursor/commands/         Cursor slash commands (opsx-propose, opsx-apply, opsx-explore, opsx-archive)
+.cursor/skills/           Same skills mirrored for Cursor
 docs/training/path/       SDD learning path (entry: README.md)
 openspec/                 OpenSpec config + changes/ (per-change folders live here)
 prompts/                  Canonical prompt skeleton library
