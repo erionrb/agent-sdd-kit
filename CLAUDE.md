@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-This is a **Spec Driven Development (SDD) framework workspace** — a personal environment for practicing and extending AI-driven development using the SDD methodology. It is not a product codebase; it's the tooling and documentation layer that sits on top of projects.
+This is **agent-sdd-kit** — an open source SSD/SDD AI workflow toolkit and the canonical setup provider for applying the SDD methodology to real software repositories. It is not a product codebase; it is the tooling, training, prompt, and setup layer reused across projects.
 
 ## Workflow
 

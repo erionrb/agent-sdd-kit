@@ -1,2 +1,2 @@
 - [User Profile](user_profile.md) — senior dev at Protofire, uses Cursor + Claude Code, building SDD workflow
-- [Project: ia repo](project_ia_repo.md) — learning path and SDD framework setup for AI-driven development
+- [Project: agent-sdd-kit](project_ia_repo.md) — SSD/SDD AI workflow toolkit: training path, prompt library, setup:repo bootstrapper, Claude Code + OpenSpec commands

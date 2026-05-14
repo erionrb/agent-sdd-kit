@@ -148,7 +148,6 @@ metadata:
 - Wants to reduce dependency on pure consulting by building recurring-revenue products.
 - Explores products in:
   - AI automation
-  - WhatsApp automation
   - Local business marketing
   - Blockchain infrastructure
   - RWA verification

@@ -1,6 +1,6 @@
 ---
-name: ai-engineering-training
-description: This project is a personal SDD framework workspace — has OpenSpec skills installed and a learning path. Missing context docs and SDD agent skills.
+name: agent-sdd-kit
+description: Open source SSD/SDD AI workflow toolkit — training path, prompt library, Claude Code + OpenSpec commands, and setup:repo bootstrapper for real projects.
 metadata:
   type: project
 ---
