@@ -258,15 +258,24 @@ For each task in `tasks.md`:
 
 ---
 
-## 6. Model usage policy
+## 6. Cost control policy
+
+**Output tokens are the main cost driver.** Every full file printed, every passing test log, every verbose summary burns tokens at the same rate as Sonnet/Opus input.
 
 | Task | Model |
 |------|-------|
-| Discovery, local docs, summaries | Free / low-cost models |
-| OpenSpec generation, implementation, review, compressed debugging | Sonnet |
-| Critical architecture decisions, security review, deep debugging | Opus (rare) |
+| Daily reports, summaries, session captures, mechanical docs, simple formatting | Free / low-cost (Haiku, Gemini Flash, DeepSeek) |
+| Discovery, doc extraction, checklists | Free / low-cost |
+| OpenSpec generation, implementation, review, QA, normal debugging | Sonnet (default) |
+| Critical architecture decisions, security review, deep debugging after Sonnet fails | Opus (escalation only — rare) |
 
-Never use Opus in a long implementation loop. Reserve it for single-turn decisions where correctness outweighs cost.
+**Rules:**
+- Sonnet is the default for all SDD phases.
+- Opus is escalation only — never the default for any phase. Justify before invoking.
+- Use Haiku/free/low-cost for daily reports, summaries, mechanical documentation, first-pass discovery.
+- Do not print full files or full diffs. Write artifacts to files; print only summaries in chat.
+- If tests pass, print command + pass summary only. Print failing output only on failure.
+- Never use Opus in a long implementation loop. Reserve it for single-turn decisions where correctness outweighs cost.
 
 ---
 

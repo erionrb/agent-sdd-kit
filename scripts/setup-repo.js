@@ -518,6 +518,20 @@ phases that don't have a dedicated OpenSpec command (discovery, local docs, revi
 - Keep output concise. Follow \`prompts/policies/output-policy.md\`.
 - Select models per task size. Follow \`prompts/policies/model-policy.md\`.
 - Respect token budgets. Follow \`prompts/policies/budget-policy.md\`.
+
+## Cost control policy
+
+| Task | Model |
+|------|-------|
+| Daily reports, summaries, session captures, mechanical docs | Free / low-cost (Haiku, Gemini Flash, DeepSeek) |
+| Discovery, doc extraction, checklists | Free / low-cost |
+| OpenSpec generation, implementation, review, QA, normal debugging | Sonnet (default) |
+| Critical architecture, deep security, explicit high-stakes reasoning | Opus (escalation only) |
+
+- Opus must not be the default for any phase. Justify before invoking.
+- Do not print full files or full diffs. Write artifacts to files; print only summaries in chat.
+- If tests pass, print command + pass summary only. Print failing output only on failure.
+- Output tokens are the main cost driver — keep responses short and bounded.
 `
 );
 
@@ -618,6 +632,20 @@ phases that don't have a dedicated OpenSpec command (discovery, local docs, revi
 - Keep output concise. Follow \`prompts/policies/output-policy.md\`.
 - Select models per task size. Follow \`prompts/policies/model-policy.md\`.
 - Respect token budgets. Follow \`prompts/policies/budget-policy.md\`.
+
+## Cost control policy
+
+| Task | Model |
+|------|-------|
+| Daily reports, summaries, session captures, mechanical docs | Free / low-cost (Haiku, Gemini Flash, DeepSeek) |
+| Discovery, doc extraction, checklists | Free / low-cost |
+| OpenSpec generation, implementation, review, QA, normal debugging | Sonnet (default) |
+| Critical architecture, deep security, explicit high-stakes reasoning | Opus (escalation only) |
+
+- Opus must not be the default for any phase. Justify before invoking.
+- Do not print full files or full diffs. Write artifacts to files; print only summaries in chat.
+- If tests pass, print command + pass summary only. Print failing output only on failure.
+- Output tokens are the main cost driver — keep responses short and bounded.
 `
 );
 

@@ -77,8 +77,9 @@ grep -A 5 "Task {{TASK_NUMBER}}:" openspec/changes/{{CHANGE_NAME}}/tasks.md
   </implementation_rules>
 
   <output_policy>
-    - Show only the diff for each modified file (not the full file).
-    - Print test output in full (it is bounded).
+    - Do not print full diffs unless explicitly requested. Show only changed lines.
+    - Print only failing test output. If tests pass, print: command + pass summary (e.g. "npm test — 12 passed").
+    - Final response must be under 120 words.
     - Confirm with: "Task {{TASK_NUMBER}} complete. Tests: [pass/fail summary]. Checkbox marked done."
     - Do not summarize what you did beyond the confirmation line.
   </output_policy>
@@ -100,7 +101,7 @@ grep -A 5 "Task {{TASK_NUMBER}}:" openspec/changes/{{CHANGE_NAME}}/tasks.md
 
 ## Output policy
 
-Diffs for changed files. Full test output. One-line confirmation. No summaries.
+Changed lines only (no full diffs). Failing test output only (pass = command + summary). Final response under 120 words. One-line confirmation. No summaries.
 
 ## Next phase
 

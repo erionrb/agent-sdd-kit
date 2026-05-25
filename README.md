@@ -157,19 +157,25 @@ npm run setup:repo -- --target ~/dev/coingecko-tokens-dashboard --mode copy
 
 ---
 
-## Budget and model usage
+## Cost control policy
+
+**Output tokens are the main cost driver.** Every full file printed, every passing test log, every verbose summary burns output tokens at the same rate as Sonnet/Opus input.
 
 | Task | Model |
 |------|-------|
-| Discovery, docs, summaries | Free / low-cost models |
-| OpenSpec generation, implementation, review, compressed debugging | Sonnet |
-| Critical review, deep debug, security analysis | Opus (rare) |
+| Daily reports, summaries, session captures, mechanical docs, simple formatting | Free / low-cost (Haiku, Gemini Flash, DeepSeek) |
+| Discovery, doc extraction, checklists | Free / low-cost |
+| OpenSpec generation, implementation, review, QA, normal debugging | Sonnet (default) |
+| Critical architecture, deep security audit, explicit high-stakes reasoning | Opus (escalation only — rare) |
 
-**Practical controls:**
-- `/clear` resets context — helps hygiene but is **not** budget control.
-- **OpenRouter spend cap** is the financial safety brake; set it.
-- Avoid broad repo scans; use file allowlists instead.
-- Avoid prompts that request long outputs across many files at once.
+**Rules:**
+- Sonnet is the default for all SDD phases.
+- Opus is escalation only — never the default for any phase. Justify before invoking.
+- Use Haiku/free/low-cost for daily reports, summaries, mechanical documentation, first-pass discovery.
+- Do not print full files or full diffs. Write artifacts to files; print only the summary.
+- If tests pass, print command + pass summary only. Print failing output only on failure.
+- Use file allowlists to prevent broad repo scans.
+- `/clear` is context hygiene, **not** budget control. Set an OpenRouter spend cap as the financial brake.
 
 ---
 
